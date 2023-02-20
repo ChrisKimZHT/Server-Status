@@ -6,12 +6,7 @@ import UptimePage from "./Views/UptimePage";
 import CertStatusPage from "./Views/CertStatusPage";
 
 const App = () => {
-  const apikeys = useMemo(() => {
-    const { ApiKeys } = window.Config;
-    if (Array.isArray(ApiKeys)) return ApiKeys;
-    if (typeof ApiKeys === "string") return [ApiKeys];
-    return [];
-  }, []);
+  const apikeys = useMemo(() => window.Config.ApiKeys, []);
 
   const { IcpLicense } = window.Config;
 
@@ -21,7 +16,7 @@ const App = () => {
       <div className="container">
         <Routes>
           <Route path="/" element={<UptimePage apikeys={apikeys} />}></Route>
-          <Route path="/cert" element={<CertStatusPage />}></Route>
+          <Route path="/cert" element={<CertStatusPage />} ></Route>
         </Routes>
         <div id="footer">
           <p><Link to="https://beian.miit.gov.cn/">{IcpLicense}</Link></p>
@@ -29,7 +24,7 @@ const App = () => {
           <p>&copy; 2020 <Link to="https://status.org.cn/">STATUS.ORG.CN</Link>, Version {Package.version}</p>
         </div>
       </div>
-    </BrowserRouter>
+    </BrowserRouter >
   );
 }
 
