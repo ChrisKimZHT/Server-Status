@@ -2,7 +2,7 @@ import ReactTooltip from 'react-tooltip';
 import { useEffect, useState } from 'react';
 import { GetMonitors } from '../common/uptimerobot';
 import { formatDuration, formatNumber } from '../common/helper';
-import Link from './link';
+import { Link } from 'react-router-dom';
 
 function UptimeRobot({ apikey }) {
 
@@ -25,7 +25,7 @@ function UptimeRobot({ apikey }) {
     <div key={site.id} className='site'>
       <div className='meta'>
         <span className='name' dangerouslySetInnerHTML={{ __html: site.name }} />
-        {ShowLink && <Link className='link' to={site.url} text={site.name} />}
+        {ShowLink && <Link className='link' to={site.url}>{site.name}</Link>}
         <span className={'status ' + site.status}>{status[site.status]}</span>
       </div>
       <div className='timeline'>

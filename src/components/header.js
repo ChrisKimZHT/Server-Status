@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
-import Link from './link';
+import { useLocation, Link } from 'react-router-dom';
 
 function Header() {
+  const currentPath = useLocation().pathname;
 
   useEffect(() => {
     document.title = window.Config.SiteName;
@@ -10,14 +11,17 @@ function Header() {
   return (
     <div id='header'>
       <div className='container'>
-        <h1 className='logo'>{window.Config.SiteName}</h1>
+        <div className='tabs'>
+          <Link className={`tab ${currentPath == "/" ? "active" : ""}`} to="/">服务状态</Link>
+          <Link className={`tab ${currentPath == "/cert" ? "active" : ""}`} to="/cert">证书状态</Link>
+        </div>
         <div className='navi'>
           {window.Config.Navi.map((item, index) => (
-            <Link key={index} to={item.url} text={item.text} />
+            <Link key={index} to={item.url}>{item.text}</Link>
           ))}
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 

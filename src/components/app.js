@@ -1,5 +1,5 @@
-import { useMemo } from 'react';
-import Link from './link';
+import React, { useMemo } from 'react';
+import { Link, BrowserRouter } from 'react-router-dom';
 import Header from './header';
 import UptimeRobot from './uptimerobot';
 import Package from '../../package.json';
@@ -16,7 +16,7 @@ function App() {
   const { IcpLicense } = window.Config;
 
   return (
-    <>
+    <BrowserRouter>
       <Header />
       <div className='container'>
         <div id='uptime'>
@@ -25,12 +25,12 @@ function App() {
           ))}
         </div>
         <div id='footer'>
-          <p><Link to='https://beian.miit.gov.cn/' text={IcpLicense} /></p>
-          <p>基于 <Link to='https://uptimerobot.com/' text='UptimeRobot' /> 接口制作，检测频率 5 分钟</p>
-          <p>&copy; 2020 <Link to='https://status.org.cn/' text='STATUS.ORG.CN' />, Version {Package.version}</p>
+          <p><Link to='https://beian.miit.gov.cn/'>{IcpLicense}</Link></p>
+          <p>基于 <Link to='https://uptimerobot.com/'>UptimeRobot</Link> 接口制作，检测频率 5 分钟</p>
+          <p>&copy; 2020 <Link to='https://status.org.cn/'>STATUS.ORG.CN</Link>, Version {Package.version}</p>
         </div>
       </div>
-    </>
+    </BrowserRouter>
   );
 }
 
