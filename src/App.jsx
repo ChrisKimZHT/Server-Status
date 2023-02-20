@@ -1,8 +1,9 @@
 import React, { useMemo } from "react";
-import { Link, BrowserRouter } from "react-router-dom";
+import { Link, BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./Components/Header";
-import UptimeRobot from "./Components/Uptime";
 import Package from "../package.json";
+import UptimePage from "./Views/UptimePage";
+import CertStatusPage from "./Views/CertStatusPage";
 
 const App = () => {
   const apikeys = useMemo(() => {
@@ -18,11 +19,10 @@ const App = () => {
     <BrowserRouter>
       <Header />
       <div className="container">
-        <div id="uptime">
-          {apikeys.map((key) => (
-            <UptimeRobot key={key} apikey={key} />
-          ))}
-        </div>
+        <Routes>
+          <Route path="/" element={<UptimePage apikeys={apikeys} />}></Route>
+          <Route path="/cert" element={<CertStatusPage />}></Route>
+        </Routes>
         <div id="footer">
           <p><Link to="https://beian.miit.gov.cn/">{IcpLicense}</Link></p>
           <p>基于 <Link to="https://uptimerobot.com/">UptimeRobot</Link> 接口制作，检测频率 5 分钟</p>
