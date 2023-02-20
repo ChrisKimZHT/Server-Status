@@ -5,7 +5,7 @@ import { formatDuration } from "../Utils/FormatDuration";
 import { formatNumber } from "../Utils/FormatNumber";
 import { Link } from "react-router-dom";
 
-const Uptime = (apikey) => {
+const Uptime = ({ apikey }) => {
   const status = {
     ok: "正常",
     good: "一般",
