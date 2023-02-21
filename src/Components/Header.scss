@@ -1,0 +1,42 @@
+$primary-color: #3bd672;
+
+.header {
+  background-color: #121a26;
+  padding: 30px 0 60px 0;
+  color: gray;
+  width: 100%;
+
+  .container {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+
+  .tab {
+    font-size: 22px;
+    font-weight: bold;
+    display: inline;
+
+    a {
+      margin-right: 20px;
+    }
+
+    .active {
+      color: $primary-color;
+    }
+  }
+
+  .nav {
+    font-size: 14px;
+    color: #ffffff;
+
+    a {
+      margin-left: 20px;
+      transition: color ease 150ms;
+    }
+
+    a:hover {
+      color: $primary-color;
+    }
+  }
+}

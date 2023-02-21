@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import ReactTooltip from "react-tooltip";
 import { certStatus } from "../Utils/CertStatus";
+import "./Cert.scss";
 
 const Cert = ({ domain }) => {
   const { certDisplayCount, certDisplayLink } = window.Config;
@@ -18,15 +19,15 @@ const Cert = ({ domain }) => {
     const remain = expire.unix() - now.unix();
     const percent = remain / length;
     return (
-      <div className="site">
+      <div className="cert">
         <div className="meta">
           <span className="name" dangerouslySetInnerHTML={{ __html: domain }} />
           {certDisplayLink && <a className="link" href={domain}>{domain}</a>}
-          <span className={`status ${remain > 0 ? "ok" : "down"}`}>{remain > 0 ? "正常" : "过期"}</span>
+          <span className={`status ${remain > 0 ? "ok" : "expire"}`}>{remain > 0 ? "正常" : "过期"}</span>
         </div>
         <div className="timeline">
           {Array.from({ length: certDisplayCount }, (_, index) => {
-            return (<i key={index} className={index < percent * certDisplayCount ? "ok" : "none"} />)
+            return (<i key={index} className={index < percent * certDisplayCount ? "green" : "gray"} />)
           })}
         </div>
         <div className="summary">
@@ -39,7 +40,7 @@ const Cert = ({ domain }) => {
     );
   }
   return (
-    <div className="site">
+    <div className="cert">
       <div className="loading" />
     </div>
   );

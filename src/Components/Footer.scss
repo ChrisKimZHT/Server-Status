@@ -1,0 +1,13 @@
+$primary-color: #3bd672;
+
+.footer {
+  font-size: 12px;
+  text-align: center;
+  line-height: 25px;
+  color: #969ea8;
+
+  a {
+    font-weight: bold;
+    color: $primary-color;
+  }
+}

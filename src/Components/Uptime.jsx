@@ -4,8 +4,9 @@ import { GetMonitors } from "../Utils/UptimeRobot";
 import { formatDuration } from "../Utils/FormatDuration";
 import { formatNumber } from "../Utils/FormatNumber";
 import { Link } from "react-router-dom";
+import "./Uptime.scss";
 
-const Uptime = ({ apikey }) => {
+const Uptime = ({ apiKey }) => {
   const status = {
     ok: "正常",
     good: "一般",
@@ -18,12 +19,12 @@ const Uptime = ({ apikey }) => {
   const [monitors, setMonitors] = useState();
 
   useEffect(() => {
-    GetMonitors(apikey, uptimeDisplayCount).then(setMonitors);
-  }, [apikey, uptimeDisplayCount]);
+    GetMonitors(apiKey, uptimeDisplayCount).then(setMonitors);
+  }, [apiKey, uptimeDisplayCount]);
 
   if (monitors) {
     return monitors.map((site) => (
-      <div key={site.id} className="site">
+      <div key={site.id} className="uptime">
         <div className="meta">
           <span className="name" dangerouslySetInnerHTML={{ __html: site.name }} />
           {uptimeDisplayLink && <Link className="link" to={site.url}>{site.name}</Link>}
@@ -66,7 +67,7 @@ const Uptime = ({ apikey }) => {
     ));
   }
   return (
-    <div className="site">
+    <div className="uptime">
       <div className="loading" />
     </div>
   );
