@@ -4,6 +4,7 @@ import Header from "./Components/Header";
 import UptimePage from "./Views/UptimePage";
 import CertStatusPage from "./Views/CertStatusPage";
 import Footer from "./Components/Footer";
+import NotFound from "./Views/NotFound";
 
 const App = () => {
   useEffect(() => {
@@ -16,6 +17,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<UptimePage />}></Route>
           <Route path="/cert" element={<CertStatusPage />} ></Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
       <Footer />
