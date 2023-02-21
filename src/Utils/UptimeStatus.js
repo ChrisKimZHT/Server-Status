@@ -2,7 +2,7 @@ import axios from 'axios';
 import dayjs from 'dayjs';
 import { formatNumber } from './FormatNumber';
 
-export const GetMonitors = async (apikey, days) => {
+export const uptimeStatus = async (apikey, days) => {
 
   const dates = [];
   const today = dayjs(new Date().setHours(0, 0, 0, 0));

@@ -1,6 +1,6 @@
 import ReactTooltip from "react-tooltip";
 import { useEffect, useState } from "react";
-import { GetMonitors } from "../Utils/UptimeRobot";
+import { uptimeStatus } from "../Utils/UptimeStatus";
 import { formatDuration } from "../Utils/FormatDuration";
 import { formatNumber } from "../Utils/FormatNumber";
 import { Link } from "react-router-dom";
@@ -19,7 +19,7 @@ const Uptime = ({ apiKey }) => {
   const [monitors, setMonitors] = useState();
 
   useEffect(() => {
-    GetMonitors(apiKey, uptimeDisplayCount).then(setMonitors);
+    uptimeStatus(apiKey, uptimeDisplayCount).then(setMonitors);
   }, [apiKey, uptimeDisplayCount]);
 
   if (monitors) {
