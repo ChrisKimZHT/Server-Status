@@ -1,6 +1,6 @@
 import ReactTooltip from "react-tooltip";
 import { useEffect, useState } from "react";
-import { GetMonitors } from "../Utils/Uptimerobot";
+import { GetMonitors } from "../Utils/UptimeRobot";
 import { formatDuration } from "../Utils/FormatDuration";
 import { formatNumber } from "../Utils/FormatNumber";
 import { Link } from "react-router-dom";
