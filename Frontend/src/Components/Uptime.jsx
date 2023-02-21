@@ -25,7 +25,7 @@ const Uptime = ({ apiKey }) => {
     return monitors.map((site) => (
       <div key={site.id} className="uptime">
         <div className="meta">
-          <span className="name" dangerouslySetInnerHTML={{ __html: site.name }} />
+          <span className="name">{site.name}</span>
           {uptimeDisplayLink && <a className="link" href={"//" + site.url}>{site.name}</a>}
           <span className={"status " + site.status}>{status[site.status]}</span>
         </div>
