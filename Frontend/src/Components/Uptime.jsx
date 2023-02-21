@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { uptimeStatus } from "../Utils/UptimeStatus";
 import { formatDuration } from "../Utils/FormatDuration";
 import { formatNumber } from "../Utils/FormatNumber";
-import { Link } from "react-router-dom";
 import "./Uptime.scss";
 
 const Uptime = ({ apiKey }) => {
@@ -27,7 +26,7 @@ const Uptime = ({ apiKey }) => {
       <div key={site.id} className="uptime">
         <div className="meta">
           <span className="name" dangerouslySetInnerHTML={{ __html: site.name }} />
-          {uptimeDisplayLink && <Link className="link" to={site.url}>{site.name}</Link>}
+          {uptimeDisplayLink && <a className="link" href={"//" + site.url}>{site.name}</a>}
           <span className={"status " + site.status}>{status[site.status]}</span>
         </div>
         <div className="timeline">

@@ -22,7 +22,7 @@ const Cert = ({ domain }) => {
       <div className="cert">
         <div className="meta">
           <span className="name" dangerouslySetInnerHTML={{ __html: domain }} />
-          {certDisplayLink && <a className="link" href={domain}>{domain}</a>}
+          {certDisplayLink && <a className="link" href={"//" + domain}>{domain}</a>}
           <span className={`status ${remain > 0 ? "ok" : "expire"}`}>{remain > 0 ? "正常" : "过期"}</span>
         </div>
         <div className="timeline">
