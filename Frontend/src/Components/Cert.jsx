@@ -31,9 +31,9 @@ const Cert = ({ domain }) => {
           })}
         </div>
         <div className="summary">
-          <span>{expire.format("YYYY/MM/DD HH:mm:ss")}</span>
+          <span>{expire.format("YYYY/MM/DD")}</span>
           <span data-tip={certInfo["issuer"]}>{certInfo["subject"]}</span>
-          <span>{start.format("YYYY/MM/DD HH:mm:ss")}</span>
+          <span>{start.format("YYYY/MM/DD")}</span>
         </div>
         <ReactTooltip className="tooltip" place="bottom" type="dark" effect="solid" />
       </div>

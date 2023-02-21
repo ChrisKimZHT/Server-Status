@@ -28,7 +28,7 @@ window.Config = {
   uptimeDisplayLink: true,
 
   // 证书状态设置
-  certAPI: 'http://127.0.0.1:5000/',
+  certAPI: 'http://127.0.0.1:5000/cert',
   monitorDomains: [
     'www.chriskim.cn',
     'www.zouht.com',
