@@ -1,6 +1,7 @@
 window.Config = {
-  SiteName: '服务器状态',
-  Navi: [
+  // 网页设置
+  title: '服务器状态',
+  navbar: [
     {
       text: '主页',
       url: 'https://www.chriskim.cn/'
@@ -14,16 +15,22 @@ window.Config = {
       url: 'https://github.com/ChrisKimZHT'
     },
   ],
-  IcpLicense: '',
-  ApiKeys: [
+  icpLicense: '',
+
+  // 服务状态设置
+  apiKeys: [
     'm788929911-c34f907a6baee22a878e9ade',
     'm788931826-4c77125aaadad880a8ab47d5',
     'm793139583-410b84b326e917d434cc58fc',
   ],
-  CountDays: 90,
-  ShowLink: true,
-  CertMonitor: [
-    'https://www.chriskim.cn/',
-    'https://www.zouht.com/',
-  ]
+  uptimeDisplayCount: 90,
+  uptimeDisplayLink: true,
+
+  // 证书状态设置
+  monitorDomains: [
+    'www.chriskim.cn',
+    'www.zouht.com',
+  ],
+  certDisplayCount: 90,
+  certDisplayLink: true,
 };
