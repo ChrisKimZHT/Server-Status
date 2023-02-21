@@ -35,7 +35,7 @@ const Cert = ({ domain }) => {
           <span data-tip={certInfo["issuer"]}>{certInfo["subject"]}</span>
           <span>{start.format("YYYY/MM/DD HH:mm:ss")}</span>
         </div>
-        <ReactTooltip className="tooltip" place="top" type="dark" effect="solid" />
+        <ReactTooltip className="tooltip" place="bottom" type="dark" effect="solid" />
       </div>
     );
   }
