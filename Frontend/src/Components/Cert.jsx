@@ -8,7 +8,7 @@ const Cert = ({ domain }) => {
   const { certDisplayCount, certDisplayLink } = window.Config;
   const [certInfo, setCertInfo] = useState();
   useEffect(() => {
-    certStatus("https://" + domain).then(setCertInfo);
+    certStatus(domain).then(setCertInfo);
   }, [domain]);
 
   if (certInfo) {
