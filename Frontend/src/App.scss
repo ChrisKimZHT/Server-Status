@@ -34,5 +34,14 @@ a {
   overflow: hidden;
 }
 
+@media(max-width: 600px) {
+  .hide-600 {
+    display: none;
+  }
+}
 
-
+@media(min-width: 600px) {
+  .show-600 {
+    display: none;
+  }
+}

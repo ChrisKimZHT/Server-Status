@@ -35,6 +35,6 @@ window.Config = {
     'www.chriskim.cn',
     'www.zouht.com',
   ],
-  certDisplayCount: 90,
+  certDisplayCount: 100,
   certDisplayLink: true,
 };

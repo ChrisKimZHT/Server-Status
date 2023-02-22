@@ -23,7 +23,7 @@ const Cert = ({ domain }) => {
         <div className="meta">
           <span className="name">{domain}</span>
           {certDisplayLink && <a className="link" href={"//" + domain}>{domain}</a>}
-          <span className={`status ${remain > 0 ? "ok" : "expire"}`}>{remain > 0 ? "正常" : "过期"}</span>
+          <span className={`status ${remain > 0 ? "ok" : "expire"}`}>{remain > 0 ? `正常 (${(percent * 100).toFixed(1)}%)` : "过期 (0.0%)"}</span>
         </div>
         <div className="timeline">
           {Array.from({ length: certDisplayCount }, (_, index) => {
@@ -32,7 +32,12 @@ const Cert = ({ domain }) => {
         </div>
         <div className="summary">
           <span>{expire.format("YYYY/MM/DD")}</span>
-          <span data-tip={certInfo["issuer"]}>{certInfo["subject"]}</span>
+          <span className="hide-600">
+            {`有效期 ${Math.round(length / 86400)} 天，剩余 ${(remain / 86400).toFixed(1)} 天`}
+          </span>
+          <span className="show-600">
+            {`剩余 ${(remain / 86400).toFixed(1)} 天`}
+          </span>
           <span>{start.format("YYYY/MM/DD")}</span>
         </div>
         <ReactTooltip className="tooltip" place="bottom" type="dark" effect="solid" />
