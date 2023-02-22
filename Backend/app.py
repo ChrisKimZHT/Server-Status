@@ -60,7 +60,6 @@ def check_cert(domain: str) -> dict:
         subject = re.search(r"subject: (.*)", output).group(1)
         start = re.search(r"start date: (.*)", output).group(1)
         expire = re.search(r"expire date: (.*)", output).group(1)
-        subjectAltName = re.search(r"subjectAltName: (.*)", output).group(1)
         issuer = re.search(r"issuer: (.*)", output).group(1)
         return {
             "status": 0,
@@ -68,7 +67,6 @@ def check_cert(domain: str) -> dict:
             "subject": subject,
             "start date": start,
             "expire date": expire,
-            "subjectAltName": subjectAltName,
             "issuer": issuer
         }
     except Exception as e:
