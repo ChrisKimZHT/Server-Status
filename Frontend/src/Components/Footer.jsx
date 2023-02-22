@@ -6,7 +6,7 @@ const Footer = () => {
   const { icpLicense } = window.Config;
   return (
     <div className="footer">
-      <p><a to="https://beian.miit.gov.cn/">{icpLicense}</a></p>
+      <p><a href="https://beian.miit.gov.cn/">{icpLicense}</a></p>
       <p>Server-Status by <a href="https://github.com/ChrisKimZHT/Server-Status">ChrisKimZHT</a>, Version {Package.version}</p>
     </div>
   );

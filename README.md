@@ -27,12 +27,12 @@ Forked from [yb/uptime-status](https://github.com/yb/uptime-status)
    - `navbar`: 导航栏链接
    - `icpLicense`: ICP 备案号（留空不显示）
    - `uptimeTitle`: 服务状态页面标题
-   - `uptimeAPI`: UptimeRobot API 地址，默认使用 [yb](https://github.com/yb) 搭建的反代节点。
+   - `uptimeAPI`: UptimeRobot API 地址，默认使用我的公开节点。
    - `apiKeys`: UptimeRobot API Key (Monitor-Specific API Keys 或 Read-Only API Key)
    - `uptimeDisplayCount`: 显示的日志天数
    - `uptimeDisplayLink`: 服务状态页面是否提供跳转链接
    - `certTitle`: 证书状态页面标题
-   - `certAPI`: 后端服务器地址，默认不提供，需要自己搭建后端
+   - `certAPI`: 后端服务器地址，默认使用我的公开节点。
    - `monitorDomains`: 需要监控证书的站点
    - `certDisplayCount`: 证书时长余量粒度
    - `certDisplayLink`: 证书状态页面是否提供跳转链接
@@ -54,9 +54,9 @@ Forked from [yb/uptime-status](https://github.com/yb/uptime-status)
 
 若不想自建后端，可使用我公开的后端服务，地址为：https://api.chriskim.top/
 
-该后端使用云函数部署，**不对可用性做出保证**，建议有能力的话自己部署。
+该后端使用阿里云 FC + CDN 部署，**但不对可用性做出保证**，建议有能力的话自己部署。
 
-### 注意事项
+## 注意事项
 
 **1. 推荐部署方式**
 
@@ -82,4 +82,10 @@ location / {
 
 **3. 后端 cURL 版本问题**
 
-不同版本的 cURL 返回的格式可能不同，导致正则表达式匹配异常，如果出现异常可提 issue.
+不同版本的 cURL 返回的格式可能不同，导致正则表达式匹配异常。
+
+如果系统的 cURL 不兼容，可以单独[下载](https://curl.se/download.html) cURL 二进制，放置在后端根目录，然后将 `check_cert` 函数内的 `command ` 前加 `./` 即可。
+
+**4. 后端云函数部署建议**
+
+如果使用云函数部署后端，建议关闭程序内置缓存功能，将 `cache.memoize` 内的 `timeout` 改为 0.
