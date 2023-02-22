@@ -8,8 +8,8 @@ const Header = () => {
     <div className="header">
       <div className="container">
         <div className="tab">
-          <Link className={currentPath == "/" ? "active" : ""} to="/">服务状态</Link>
-          <Link className={currentPath == "/cert" ? "active" : ""} to="/cert">证书状态</Link>
+          <Link className={currentPath == "/" ? "active" : ""} to="/">{window.Config.uptimeTitle}</Link>
+          <Link className={currentPath == "/cert" ? "active" : ""} to="/cert">{window.Config.certTitle}</Link>
         </div>
         <div className="nav">
           {window.Config.navbar.map((item, index) => (

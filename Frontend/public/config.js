@@ -18,6 +18,7 @@ window.Config = {
   icpLicense: '',
 
   // 服务状态设置
+  uptimeTitle: '服务监控',
   uptimeAPI: 'https://cors.status.org.cn/uptimerobot/v2/getMonitors',
   apiKeys: [
     'm788929911-c34f907a6baee22a878e9ade',
@@ -28,6 +29,7 @@ window.Config = {
   uptimeDisplayLink: true,
 
   // 证书状态设置
+  certTitle: '证书监控',
   certAPI: 'http://127.0.0.1:5000/cert',
   monitorDomains: [
     'www.chriskim.cn',
