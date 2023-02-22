@@ -67,12 +67,13 @@ $primary-color: #3bd672;
     display: flex;
     justify-content: space-between;
     margin: 15px 0 10px 0;
-
+    border-radius: 10px;
+    border: #e5e8eb 1px solid;
+    overflow: hidden;
+    
     i {
       flex-grow: 1;
-      margin: 0 1px;
-      height: 25px;
-      border-radius: 5px;
+      height: 15px;
       transition: opacity ease 150ms;
 
       &.ok {
