@@ -54,10 +54,13 @@ const Uptime = ({ apiKey }) => {
         </div>
         <div className="summary">
           <span>今天</span>
-          <span>
+          <span className="hide-600">
             {site.total.times
               ? `最近 ${uptimeDisplayCount} 天故障 ${site.total.times} 次，累计 ${formatDuration(site.total.duration)}，平均可用率 ${site.average}%`
               : `最近 ${uptimeDisplayCount} 天可用率 ${site.average}%`}
+          </span>
+          <span className="show-600">
+            {`可用率 ${site.average} %`}
           </span>
           <span>{site.daily[site.daily.length - 1].date.format("YYYY-MM-DD")}</span>
         </div>

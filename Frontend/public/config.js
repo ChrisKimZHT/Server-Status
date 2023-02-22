@@ -18,7 +18,8 @@ window.Config = {
   icpLicense: '',
 
   // 服务状态设置
-  uptimeAPI: 'https://cors.status.org.cn/uptimerobot/v2/getMonitors',
+  uptimeTitle: '服务监控',
+  uptimeAPI: 'https://s1.chriskim.top/status/uptime',
   apiKeys: [
     'm788929911-c34f907a6baee22a878e9ade',
     'm788931826-4c77125aaadad880a8ab47d5',
@@ -28,11 +29,12 @@ window.Config = {
   uptimeDisplayLink: true,
 
   // 证书状态设置
-  certAPI: 'http://127.0.0.1:5000/cert',
+  certTitle: '证书监控',
+  certAPI: 'https://s1.chriskim.top/status/cert',
   monitorDomains: [
     'www.chriskim.cn',
     'www.zouht.com',
   ],
-  certDisplayCount: 90,
+  certDisplayCount: 100,
   certDisplayLink: true,
 };

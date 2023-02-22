@@ -13,13 +13,24 @@ $primary-color: #3bd672;
   }
 
   .tab {
-    font-size: 22px;
+    @media(min-width: 600px) {
+      font-size: 22px;
+
+      a {
+        margin-right: 20px;
+      }
+    }
+
+    @media(max-width: 600px) {
+      font-size: 15px;
+
+      a {
+        margin-right: 10px;
+      }
+    }
+
     font-weight: bold;
     display: inline;
-
-    a {
-      margin-right: 20px;
-    }
 
     .active {
       color: $primary-color;
