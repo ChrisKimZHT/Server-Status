@@ -19,7 +19,7 @@ window.Config = {
 
   // 服务状态设置
   uptimeTitle: '服务监控',
-  uptimeAPI: 'https://s1.chriskim.top/status/uptime',
+  uptimeAPI: 'https://api.chriskim.top/uptime',
   apiKeys: [
     'm788929911-c34f907a6baee22a878e9ade',
     'm788931826-4c77125aaadad880a8ab47d5',
@@ -30,7 +30,7 @@ window.Config = {
 
   // 证书状态设置
   certTitle: '证书监控',
-  certAPI: 'https://s1.chriskim.top/status/cert',
+  certAPI: 'https://api.chriskim.top/cert',
   monitorDomains: [
     'www.chriskim.cn',
     'www.zouht.com',
