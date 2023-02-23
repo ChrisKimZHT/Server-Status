@@ -4,10 +4,14 @@ from flask_caching import Cache
 import requests
 import subprocess
 import re
+import configs
 
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
-cache = Cache(app, config={'CACHE_TYPE': 'SimpleCache'})
+if configs.ENABLE_CACHE:
+    cache = Cache(app, config={'CACHE_TYPE': 'SimpleCache'})
+else:
+    cache = Cache(app, config={'CACHE_TYPE': 'NullCache'})
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -15,11 +19,10 @@ def index():
     return "Hello World!"
 
 
-@cache.memoize(timeout=60 * 5)
+@cache.memoize(timeout=configs.UPTIME_CACHE_TIMEOUT)
 def check_uptime(data: dict) -> dict:
-    uptime_api = "https://api.uptimerobot.com/v2/getMonitors"
     try:
-        resp = requests.post(uptime_api, data=data)
+        resp = requests.post(configs.UPTIMEROBOT_API, data=data)
         if resp.status_code == 200:
             resp_data = resp.json()
             resp_data["backend-status"] = "0"
@@ -55,10 +58,10 @@ def uptime():
         return jsonify(result), 500
 
 
-@cache.memoize(timeout=60 * 60 * 24)
+@cache.memoize(timeout=configs.CERT_CACHE_TIMEOUT)
 def check_cert(domain: str) -> dict:
     try:
-        command = f"curl -Ivs {domain} --connect-timeout 5"
+        command = f"{configs.CURL_BIN} -Ivs {domain} --connect-timeout 5"
         output = subprocess.getstatusoutput(command)[1]
         subject = re.search(r"subject: (.*)", output).group(1)
         start = re.search(r"start date: (.*)", output).group(1)
