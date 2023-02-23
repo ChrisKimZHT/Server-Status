@@ -15,7 +15,7 @@ export const uptimeStatus = async (apikey, days) => {
   const end = dates[0].add(1, 'day').unix();
   ranges.push(`${start}_${end}`);
 
-  const postdata = {
+  const argdata = {
     api_key: apikey,
     format: 'json',
     logs: 1,
@@ -25,7 +25,7 @@ export const uptimeStatus = async (apikey, days) => {
     custom_uptime_ranges: ranges.join('-'),
   };
 
-  const response = await axios.post(window.Config.uptimeAPI, postdata, { timeout: 10000 });
+  const response = await axios.get(window.Config.uptimeAPI, { params: argdata, timeout: 10000 });
   if (response.data.stat !== 'ok') throw response.data.error;
   return response.data.monitors.map((monitor) => {
 
