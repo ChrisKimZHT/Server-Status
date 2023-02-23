@@ -10,7 +10,7 @@ CORS(app, supports_credentials=True)
 cache = Cache(app, config={'CACHE_TYPE': 'SimpleCache'})
 
 
-@app.route("/", methods=["GET"])
+@app.route("/", methods=["GET", "POST"])
 def index():
     return "Hello World!"
 
@@ -22,31 +22,34 @@ def check_uptime(data: dict) -> dict:
         resp = requests.post(uptime_api, data=data)
         if resp.status_code == 200:
             resp_data = resp.json()
-            resp_data["x-stat"] = "0"
-            resp_data["x-message"] = "ok"
+            resp_data["backend-status"] = "0"
+            resp_data["backend-message"] = "ok"
             return resp_data
         else:
             return {
-                "x-stat": "1",
-                "x-message": "request failed"
+                "backend-status": "1",
+                "backend-message": "request failed"
             }
     except Exception as e:
         return {
-            "x-stat": "1",
-            "x-message": str(e)
+            "backend-status": "1",
+            "backend-message": str(e)
         }
 
 
-@app.route("/uptime", methods=["POST"])
+@app.route("/uptime", methods=["GET", "POST"])
 def uptime():
-    data = request.get_json()
+    if request.method == "GET":
+        data = request.args
+    else:
+        data = request.get_json()
     if data is None:
         return jsonify({
-            "x-stat": "1",
-            "x-message": "data is required"
+            "backend-status": "1",
+            "backend-message": "data is required"
         }), 400
     result = check_uptime(data)
-    if result["x-stat"] == "0":
+    if result["backend-status"] == "0":
         return jsonify(result), 200
     else:
         return jsonify(result), 500
@@ -62,8 +65,8 @@ def check_cert(domain: str) -> dict:
         expire = re.search(r"expire date: (.*)", output).group(1)
         issuer = re.search(r"issuer: (.*)", output).group(1)
         return {
-            "status": 0,
-            "message": "ok",
+            "backend-status": 0,
+            "backend-message": "ok",
             "subject": subject,
             "start date": start,
             "expire date": expire,
@@ -71,23 +74,26 @@ def check_cert(domain: str) -> dict:
         }
     except Exception as e:
         return {
-            "status": 1,
-            "message": str(e),
+            "backend-status": 1,
+            "backend-message": str(e),
         }
 
 
-@app.route("/cert", methods=["GET"])
+@app.route("/cert", methods=["GET", "POST"])
 def cert():
-    domain = request.args.get("domain")
+    if request.method == "GET":
+        domain = request.args.get("domain")
+    else:
+        domain = request.get_json().get("domain")
     if domain is None:
         return jsonify({
-            "status": 1,
-            "message": "domain is required"
+            "backend-status": 1,
+            "backend-message": "domain is required"
         }), 400
     if not re.match(r"https://", str(domain)):
         domain = "https://" + domain
     result = check_cert(domain)
-    if result["status"] == 0:
+    if result["backend-status"] == 0:
         return jsonify(result), 200
     else:
         return jsonify(result), 500
