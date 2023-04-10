@@ -51,7 +51,12 @@ $primary-color: #3bd672;
         color: $primary-color;
       }
 
-      &.expire {
+      &.expiring {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-5 0 24 24'%3E%3Ccircle cx='12' cy='21' r='2.5' fill='%23ffa600' %3E%3C/circle%3E%3Cpath d='M10 0h4v16h-4z' fill='%23ffa600' %3E%3C/path%3E%3C/svg%3E");
+        color: #ffa600;
+      }
+
+      &.expired {
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1064 1024' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M205.09 959.373l327.82-327.83 327.827 327.83L981.31 838.79 653.49 510.97l327.82-327.814L860.737 62.58 532.91 390.4 205.09 62.581 84.527 183.155l327.82 327.814-327.82 327.82z' fill='%23DE484A'/%3E%3C/svg%3E");
         color: #de484a;
       }
@@ -73,6 +78,14 @@ $primary-color: #3bd672;
 
       &.green {
         background-color: $primary-color;
+      }
+
+      &.orange {
+        background-color: #ffa600;
+      }
+
+      &.red {
+        background-color: #de484a;
       }
 
       &.gray {

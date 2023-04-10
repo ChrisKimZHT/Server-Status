@@ -11,6 +11,32 @@ const Cert = ({ domain }) => {
     certStatus(domain).then(setCertInfo);
   }, [domain]);
 
+  const timelineColor = (index, percent) => {
+    if (percent <= 0.00)
+      return "red";
+    if (index >= percent * certDisplayCount)
+      return "gray";
+    if (percent <= 0.10)
+      return "orange";
+    return "green";
+  }
+
+  const statusColor = (percent) => {
+    if (percent <= 0.00)
+      return "expired";
+    if (percent <= 0.10)
+      return "expiring";
+    return "ok";
+  }
+
+  const statusText = (percent) => {
+    if (percent <= 0.00)
+      return "过期";
+    if (percent <= 0.10)
+      return "临期";
+    return "正常";
+  }
+
   if (certInfo) {
     const now = dayjs();
     const start = dayjs(certInfo["start date"]);
@@ -23,14 +49,14 @@ const Cert = ({ domain }) => {
         <div className="meta">
           <span className="name">{domain}</span>
           {certDisplayLink && <a className="link" href={"//" + domain}>{domain}</a>}
-          <span className={`status ${remain > 0 ? "ok" : "expire"}`}>{remain > 0 ? `正常` : "过期"}</span>
+          <span className={`status ${statusColor(percent)}`}>{statusText(percent)}</span>
         </div>
         <div className="timeline">
           {Array.from({ length: certDisplayCount }, (_, index) => {
             return (
               <i
                 key={index}
-                className={index < percent * certDisplayCount ? "green" : "gray"}
+                className={timelineColor(index, percent)}
               />
             )
           })}
