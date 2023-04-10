@@ -1,0 +1,42 @@
+.timeline {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0 10px 0;
+  border-radius: 10px;
+  border: #e5e8eb 1px solid;
+  overflow: hidden;
+
+  i {
+    flex-grow: 1;
+    height: 15px;
+    transition: opacity ease 150ms;
+
+    &.green {
+      background-color: #3bd672;
+    }
+
+    &.orange {
+      background-color: #ffa500;
+    }
+
+    &.red {
+      background-color: #de484a;
+    }
+
+    &.gray {
+      background-color: #e5e8eb;
+    }
+
+    &:hover {
+      opacity: 0.6;
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

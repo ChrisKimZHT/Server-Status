@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import ReactTooltip from "react-tooltip";
 import { certStatus } from "../Utils/CertStatus";
 import "./Cert.scss";
+import Loading from './Loading';
+import Timeline from './Timeline';
 
 const Cert = ({ domain }) => {
   const { certDisplayCount, certDisplayLink } = window.Config;
@@ -10,6 +12,38 @@ const Cert = ({ domain }) => {
   useEffect(() => {
     certStatus(domain).then(setCertInfo);
   }, [domain]);
+
+  const statusColor = (percent) => {
+    if (percent <= 0.00)
+      return "expired";
+    if (percent <= 0.10)
+      return "expiring";
+    return "ok";
+  }
+
+  const statusText = (percent) => {
+    if (percent <= 0.00)
+      return "过期";
+    if (percent <= 0.10)
+      return "临期";
+    return "正常";
+  }
+
+  const createTimelineData = (percent) => {
+    const timelineData = [];
+    for (let i = 0; i < certDisplayCount; i++) {
+      if (percent <= 0.00) {
+        timelineData.push({ color: "red" });
+      } else if (i >= percent * certDisplayCount) {
+        timelineData.push({ color: "gray" });
+      } else if (percent <= 0.10) {
+        timelineData.push({ color: "orange" });
+      } else {
+        timelineData.push({ color: "green" });
+      }
+    }
+    return timelineData;
+  }
 
   if (certInfo) {
     const now = dayjs();
@@ -23,18 +57,9 @@ const Cert = ({ domain }) => {
         <div className="meta">
           <span className="name">{domain}</span>
           {certDisplayLink && <a className="link" href={"//" + domain}>{domain}</a>}
-          <span className={`status ${remain > 0 ? "ok" : "expire"}`}>{remain > 0 ? `正常` : "过期"}</span>
+          <span className={`status ${statusColor(percent)}`}>{statusText(percent)}</span>
         </div>
-        <div className="timeline">
-          {Array.from({ length: certDisplayCount }, (_, index) => {
-            return (
-              <i
-                key={index}
-                className={index < percent * certDisplayCount ? "green" : "gray"}
-              />
-            )
-          })}
-        </div>
+        <Timeline data={createTimelineData(percent)} />
         <div className="summary">
           <span data-tip={certInfo["start date"]}>{expire.format("YYYY/MM/DD")}</span>
           <span className="hide-600" data-tip={certInfo["issuer"]}>
@@ -51,7 +76,7 @@ const Cert = ({ domain }) => {
   }
   return (
     <div className="cert">
-      <div className="loading" />
+      <Loading />
     </div>
   );
 }

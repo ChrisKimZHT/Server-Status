@@ -4,6 +4,8 @@ import { uptimeStatus } from "../Utils/UptimeStatus";
 import { formatDuration } from "../Utils/FormatDuration";
 import { formatNumber } from "../Utils/FormatNumber";
 import "./Uptime.scss";
+import Loading from "./Loading";
+import Timeline from "./Timeline";
 
 const Uptime = ({ apiKey }) => {
   const status = {
@@ -21,37 +23,44 @@ const Uptime = ({ apiKey }) => {
     uptimeStatus(apiKey, uptimeDisplayCount).then(setMonitors);
   }, [apiKey, uptimeDisplayCount]);
 
+  const createTimelineData = (monitorData) => {
+    const timelineData = [];
+    for (const data of monitorData) {
+      const date = data.date.format("YYYY-MM-DD");
+      if (data.uptime >= 100) {
+        timelineData.push({
+          color: "green",
+          text: `${date} 可用率 ${formatNumber(data.uptime)}%`
+        })
+      } else if (data.uptime >= 98) {
+        timelineData.push({
+          color: "orange",
+          text: `${date} 故障 ${data.down.times} 次，累计 ${formatDuration(data.down.duration)}，可用率 ${formatNumber(data.uptime)}%`
+        })
+      } else if (data.uptime <= 0 && data.down.times === 0) {
+        timelineData.push({
+          color: "gray",
+          text: "无数据"
+        })
+      } else {
+        timelineData.push({
+          color: "red",
+          text: `${date} 故障 ${data.down.times} 次，累计 ${formatDuration(data.down.duration)}，可用率 ${formatNumber(data.uptime)}%`
+        })
+      }
+    }
+    return timelineData;
+  }
+
   if (monitors) {
-    return monitors.map((site) => (
-      <div key={site.id} className="uptime">
+    return monitors.map((site, index) => (
+      <div key={index} className="uptime">
         <div className="meta">
           <span className="name">{site.name}</span>
           {uptimeDisplayLink && <a className="link" href={"//" + site.url}>{site.name}</a>}
           <span className={"status " + site.status}>{status[site.status]}</span>
         </div>
-        <div className="timeline">
-          {site.daily.map((data, index) => {
-            let status = "";
-            let text = data.date.format("YYYY-MM-DD ");
-            if (data.uptime >= 100) {
-              status = "ok";
-              text += `可用率 ${formatNumber(data.uptime)}%`;
-            }
-            else if (data.uptime >= 98) {
-              status = "good";
-              text += `故障 ${data.down.times} 次，累计 ${formatDuration(data.down.duration)}，可用率 ${formatNumber(data.uptime)}%`;
-            }
-            else if (data.uptime <= 0 && data.down.times === 0) {
-              status = "none";
-              text += "无数据";
-            }
-            else {
-              status = "down";
-              text += `故障 ${data.down.times} 次，累计 ${formatDuration(data.down.duration)}，可用率 ${formatNumber(data.uptime)}%`;
-            }
-            return (<i key={index} className={status} data-tip={text} />)
-          })}
-        </div>
+        <Timeline data={createTimelineData(site.daily)} />
         <div className="summary">
           <span>今天</span>
           <span className="hide-600">
@@ -70,7 +79,7 @@ const Uptime = ({ apiKey }) => {
   }
   return (
     <div className="uptime">
-      <div className="loading" />
+      <Loading />
     </div>
   );
 }
