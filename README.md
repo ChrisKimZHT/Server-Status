@@ -63,7 +63,7 @@ Forked from [yb/uptime-status](https://github.com/yb/uptime-status)
 
 ### **公开后端**
 
-若不想自建后端，可使用我公开的后端服务，地址为：https://cdn.fc.chriskim.top/
+若不想自建后端，可使用我公开的后端服务，地址为：https://www.chriskim.top/api/
 
 该后端使用阿里云 FC + CDN 部署，**但不对可用性做出保证**，建议有能力的话自己部署。
 
