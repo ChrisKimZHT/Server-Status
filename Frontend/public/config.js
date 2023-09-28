@@ -16,6 +16,8 @@ window.Config = {
     },
   ],
   icpLicense: '',
+  policeLicenseText: '',
+  policeLicenseCode: '',
 
   // 服务状态设置
   uptimeTitle: '服务监控',
