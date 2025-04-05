@@ -8,11 +8,11 @@ Forked from [yb/uptime-status](https://github.com/yb/uptime-status)
 
 ## 效果预览
 
-![](https://assets.zouht.com/img/md/Server-Status-README-04.png)
+![](./Images/Server-Status-README-04.png)
 
 
 
-![](https://assets.zouht.com/img/md/Server-Status-README-05.png)
+![](./Images/Server-Status-README-05.png)
 
 ## 部署方式
 
@@ -61,12 +61,6 @@ Forked from [yb/uptime-status](https://github.com/yb/uptime-status)
 | /uptime | GET, POST | 与 [UptimeRobot](https://uptimerobot.com/api/) 官方一致 | 服务监控信息 |
 | /cert   | GET, POST | domain: 代查域名                                        | 域名证书信息 |
 
-### **公开后端**
-
-若不想自建后端，可使用我公开的后端服务，地址为：https://www.chriskim.top/api/
-
-该后端使用阿里云 FC + CDN 部署，**但不对可用性做出保证**，建议有能力的话自己部署。
-
 ## 注意事项
 
 由于使用 React 编写并使用了路由功能，为防止 404 需要进行额外配置。
@@ -81,4 +75,4 @@ location / {
 
 - 如果使用储存桶搭建，需要将 404 页也指向 index.html，以阿里云 OSS 设置界面为例：
 
-![](https://assets.zouht.com/img/md/Server-Status-README-03.png)
+![](./Images/Server-Status-README-03.png)
